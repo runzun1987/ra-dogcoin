@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "dogecoin",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Runzun\\dogcoin\\nextjs\\dogecoin\\amplify\\backend\\api\\dogecoin\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    }
+  }
+}

@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -H 0.0.0.0 -p $PORT",
-    "heroku-postbuild":"npm run build",
-    "start:dev":"next start",
-    "start:prod":"next start -p 80",
-    "export":"next build && next export",
+    "heroku-postbuild": "npm run build",
+    "start:dev": "next start",
+    "start:prod": "next start -p 80",
+    "export": "next build && next export",
     "lint": "next lint"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.4.4",
     "animated-number-react": "^0.1.2",
+    "aws-amplify": "^4.3.15",
     "axios": "^0.26.0",
     "jquery": "^3.6.0",
     "next": "12.1.0",

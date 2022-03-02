@@ -10,6 +10,7 @@ import ReactTouchEvents from 'react-touch-events';
 import Congratulation from '../components/congratulation';
 
 import data from './../data.json';
+import { settings } from '../utils';
 
 const style = {
   position: 'absolute',
@@ -26,7 +27,15 @@ const style = {
 let startBitcoin = 0.0;
 let incrementBitCoin = parseFloat(data.increment);
 const Mine = () => {
-  const TARGET_BITCOIN = parseFloat(data.limit);
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const data1 = await settings();
+      setData(data1);
+    })();
+  }, []);
+
   const [bitCoin, setBitCoin] = useState(startBitcoin);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -34,7 +43,7 @@ const Mine = () => {
 
   let x = bitCoin;
   const handleScroll = () => {
-    if (parseFloat(x) >= TARGET_BITCOIN) {
+    if (parseFloat(x) >= data.limit) {
       setTimeout(() => {
         handleOpen();
       }, 2880);
@@ -44,55 +53,63 @@ const Mine = () => {
     }
   };
   useEffect(() => {
-    window.addEventListener('wheel', handleScroll);
+    if (data) {
+      window.addEventListener('wheel', handleScroll);
+    }
+
     // $(document).on('touchmove', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [data]);
+
 
   return (
-    <div className={styles.container}>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
-        <Congratulation message={data.message} ogUrl={data.ogUrl} />
-      </Modal>
-      <main className={styles.main}>
-        <div className='App'>
-          <header className='App-header'>
-            <h4>Your Balance </h4>
-            <h1>
-              <CountUp
-                className='account-balance'
-                start={bitCoin / 0.9}
-                end={bitCoin}
-                decimals={5}
-                duration={3}
-                useEasing={true}
-                separator=','
-              />
-            </h1>
+    <>
+      {data && (
+        <div className={styles.container}>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
+          >
+            <Congratulation message={data.message} ogUrl={data.ogUrl} />
+          </Modal>
+          <main className={styles.main}>
+            <div className='App'>
+              <header className='App-header'>
+                <h4>Your Balance </h4>
+                <h1>
+                  <CountUp
+                    className='account-balance'
+                    start={bitCoin / 0.9}
+                    end={bitCoin}
+                    decimals={5}
+                    duration={3}
+                    useEasing={true}
+                    separator=','
+                  />
+                </h1>
 
-            <p>DogeCoin</p>
-            <ReactTouchEvents onSwipe={handleScroll}>
-              <div>
-                <div className='scroll-downs'>
-                  <div className='mousey'>
-                    <div className='scroller'></div>
+                <p>DogeCoin</p>
+                <ReactTouchEvents onSwipe={handleScroll}>
+                  <div>
+                    <div className='scroll-downs'>
+                      <div className='mousey'>
+                        <div className='scroller'></div>
+                      </div>
+                    </div>
+                    <div>
+                      <p>Scroll to mine Dogecoin</p>
+                      <img src='/images/mouse.png' />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <p>Scroll to mine Dogecoin</p>
-                  <img src='/images/mouse.png' />
-                </div>
-              </div>
-            </ReactTouchEvents>
-          </header>
+                </ReactTouchEvents>
+              </header>
+            </div>
+          </main>
         </div>
-      </main>
-    </div>
+      )}
+    </>
   );
 };
 

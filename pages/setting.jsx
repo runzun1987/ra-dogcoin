@@ -1,6 +1,6 @@
-import axios from 'axios';
+import { API, graphqlOperation } from 'aws-amplify';
 
-import data from './../data.json';
+import { updateSettings } from './../src/graphql/mutations';
 
 const Setting = () => {
   const formHandler = async (e) => {
@@ -15,14 +15,23 @@ const Setting = () => {
       return;
     }
 
-    const data = {
-      message: msg,
-      ogUrl: url,
-      limit,
-      increment,
-    };
-
-    await axios.post('/api/data', data);
+    try {
+      await API.graphql(
+        graphqlOperation(updateSettings, {
+          input: {
+            id: '3e7bebed-33c2-4a39-885d-27b9f319787d',
+            message: msg,
+            ogUrl: url,
+            limit,
+            increment,
+          },
+        })
+      );
+      alert('Succussfully Updated');
+    } catch (err) {
+      console.log(err);
+      alert('There was an error');
+    }
   };
   return (
     <form onSubmit={formHandler}>

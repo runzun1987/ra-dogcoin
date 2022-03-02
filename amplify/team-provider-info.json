@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-dogecoin-dev-172143-authRole",
+      "UnauthRoleArn": "arn:aws:iam::736086997297:role/amplify-dogecoin-dev-172143-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::736086997297:role/amplify-dogecoin-dev-172143-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-dogecoin-dev-172143-deployment",
+      "UnauthRoleName": "amplify-dogecoin-dev-172143-unauthRole",
+      "StackName": "amplify-dogecoin-dev-172143",
+      "StackId": "arn:aws:cloudformation:us-east-1:736086997297:stack/amplify-dogecoin-dev-172143/0b6aa3f0-9a1d-11ec-bdb6-0e1d138ed411",
+      "AmplifyAppId": "ddn5o7nbyh6js"
+    }
+  }
+}
