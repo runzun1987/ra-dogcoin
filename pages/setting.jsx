@@ -37,12 +37,16 @@ const Setting = () => {
     <form onSubmit={formHandler}>
       <div style={{ color: 'white' }}>
         Your Custom Message :<input name='message' />
+        <br></br>
         Your Og Url:
         <input name='url' />
+        <br></br>
         Limit:
         <input name='limit' />
+        <br></br>
         increment by:
         <input name='increment' />
+        <br></br>
         <button type='submit'>Update</button>
       </div>
     </form>
